@@ -25,7 +25,7 @@ Update your main.js file before continuing.
 
 ```
 git update-index --assume-unchanged ./src/main.js
-yarn serve run
+yarn serve
 ```
 
 Issue types include
