@@ -1,4 +1,4 @@
-# lah
+# Life At Home
 
 ## Connect to Firebase
 In main.js, this needs to be updated (request access to the WWC - Phoenix Firbase console or setup your own firestore):
