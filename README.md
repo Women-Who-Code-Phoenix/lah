@@ -28,4 +28,5 @@ Issue types include
 - documentation
 
 Issue numbers looks like `LAH-1`. If That isn't assigned to a ticket, use a 1-3 word description about what's being working on.
-## Finished 
+
+Be sure to create Pull Request. At least one person is required to approve the PR before it gets merged into development.
