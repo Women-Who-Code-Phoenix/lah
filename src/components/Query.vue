@@ -122,12 +122,10 @@ export default {
           });
         })
         .catch(error => {
-          console.log("catch");
           this.hasError = true;
           this.error = error;
         })
         .finally(() => {
-          console.log("test");
           this.loading = false;
         });
     }
