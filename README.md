@@ -19,11 +19,18 @@ git clone https://github.com/Women-Who-Code-Phoenix/lah.git
 cd lah
 yarn install
 git checkout -b {{issue-type}}/{{issue-number}}
-yarn serve run
+```
+
+Update your main.js file before continuing.
+
+```
+git update-index --assume-unchanged ./src/main.js
+yarn serve
 ```
 
 Issue types include
 - enhancemnt
+- feature
 - bug
 - documentation
 
