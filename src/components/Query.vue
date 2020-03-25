@@ -118,7 +118,7 @@ export default {
         .get()
         .then(response => {
           response.forEach(doc => {
-            this.resources.push(doc.data());
+            this.resources.push({id: doc.id, ...doc.data()});
           });
         })
         .catch(error => {
