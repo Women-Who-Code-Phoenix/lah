@@ -18,7 +18,7 @@ const config = {
 git clone https://github.com/Women-Who-Code-Phoenix/lah.git
 cd lah
 yarn install
-git checkout -b {{issue-type}}/{{issue-number}}
+git checkout -b {{issue-type}}/{{brief-description}}
 ```
 
 Update your main.js file before continuing.
