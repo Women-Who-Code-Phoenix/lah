@@ -14,6 +14,7 @@ const config = {
 ```
 
 ## Pulling down for the first time
+**
 ```
 git clone https://github.com/Women-Who-Code-Phoenix/lah.git
 cd lah
@@ -28,12 +29,16 @@ git update-index --assume-unchanged ./src/main.js
 yarn serve
 ```
 
+**
 Issue types include
 - enhancemnt
 - feature
 - bug
 - documentation
 
-Issue numbers looks like `LAH-1`. If That isn't assigned to a ticket, use a 1-3 word description about what's being working on.
+Use a 1-3 word description about what's being working on.
+
+A branch name should look something like ```enhancement/about-us```.
+
 
 Be sure to create Pull Request. At least one person is required to approve the PR before it gets merged into development.
