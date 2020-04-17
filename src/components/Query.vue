@@ -1,34 +1,30 @@
 
 <template>
   <v-container fluid>
-    <!-- <v-row class="text-center">
-      <v-col cols="12">
-        <v-icon size="100" color="primary">mdi-home</v-icon>
-      </v-col>
-
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">Welcome to Life at Home</h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other developers on related projects,
-          <br />please join the CODEVID-19 online
-          <a
-            href="codevid-19.slack.com"
-            target="_blank"
-          >Slack Community</a>
-        </p>
+    <v-row justify="center" align="center" v-if="loading">
+      <v-col v-for="n in 4" :key="n" cols="12" sm="6" md="3">
+        <v-card>
+          <v-skeleton-loader
+            ref="skeleton"
+            :boilerplate="true"
+            type="article"
+            :tile="false"
+            class="mx-auto"
+          ></v-skeleton-loader>
+        </v-card>
       </v-col>
     </v-row>
-    <h2>Activities for kids</h2>
-    <v-row>
-      <v-col v-for="item in forKids" :key="item.name" cols="12" sm="6" lg="4">
-        <v-card class="card">
-          <v-card-title class="subheading font-weight-bold">{{ item.name  }}</v-card-title>
+    <v-row  v-if="!loading && resources.length > 0">
+      <v-col v-for="item in resources" :key="item.name" cols="10" sm="6" lg="3">
+        <v-card class="card" height="100%">
+          <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
           <v-divider></v-divider>
           <v-list dense>
             <v-list-item>
               <v-list-item-content>Description:</v-list-item-content>
-              <v-list-item-content class="description">{{ item.description.length > 50 ? `${item.description.substring(0, 50)}...` : item.description }}</v-list-item-content>
+              <v-list-item-content
+                class="description"
+              >{{ item.description.length > 50 ? `${item.description.substring(0, 50)}...` : item.description }}</v-list-item-content>
             </v-list-item>
             <v-list-item>
               <v-list-item-content>Tags:</v-list-item-content>
@@ -47,46 +43,31 @@
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content><router-link :to="`/details/${item.id}`">More Details...</router-link></v-list-item-content>
+              <v-list-item-content>Websites:</v-list-item-content>
+              <v-list-item-content>
+                <ul>
+                  <li v-for="(website, i) in item.websites" :key="website">
+                    <a :href="website" target="_blank">{{i+1}}</a>
+                  </li>
+                </ul>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <router-link :to="`/details/${item.id}`">More Details...</router-link>
+              </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-card>
       </v-col>
     </v-row>
-    <h2>Exercise</h2>
-    <v-row>
-      <v-col v-for="item in forExercise" :key="item.name" cols="12" sm="6" lg="4">
-        <v-card class="card">
-          <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
-          <v-divider></v-divider>
-          <v-list dense>
-            <v-list-item>
-              <v-list-item-content>Description:</v-list-item-content>
-              <v-list-item-content class="description">{{ item.description.length > 50 ? `${item.description.substring(0, 50)}...` : item.description}}</v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>Tags:</v-list-item-content>
-              <v-list-item-content>
-                <v-chip
-                  v-for="tag in item.tags"
-                  :key="tag"
-                  class="ma-2"
-                  :color="tag == 'exercise' ? 'primary' : 'grey'"
-                  label
-                  text-color="white"
-                >
-                  <v-icon left>mdi-label</v-icon>
-                  {{tag}}
-                </v-chip>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content><router-link :to="`/details/${item.id}`">More Details...</router-link></v-list-item-content>
-            </v-list-item>
-          </v-list>
+    <v-row v-else justify="center" align="center" >
+      <v-col cols="12" sm="6">
+        <v-card>
+          <v-card-title class="subheading font-weight-bold">Please adjust selected tags to see results.</v-card-title>
         </v-card>
       </v-col>
-    </v-row> -->
+    </v-row>
   </v-container>
 </template>
 
@@ -96,15 +77,19 @@ export default {
   name: "Start",
   data: () => ({
     resources: [],
+    tags: [""],
     hasError: false,
     error: "",
     firestore: firebase.firestore(),
-    // pageSize: this.$router.query.pageSize,
-    // pageNum: this.$router.query.pageNum,
-    // sortBy: this.$router.query.sortBy,
-    // direction: this.$router.query.direction
+    sortBy: "name",
+    direction: "asc",
+    loading: false
   }),
   mounted() {
+    this.tags =
+      JSON.parse(this.$route.query.tags).length > 0
+        ? JSON.parse(this.$route.query.tags)
+        : ["*"];
     this.fetchData();
   },
   computed: {
@@ -112,30 +97,38 @@ export default {
       return this.pageSize * this.pageNum - 3;
     }
   },
+  watch: {
+    $route: function(val) {
+      console.log(JSON.parse(val.query.tags).length > 0);
+      this.tags =
+        JSON.parse(val.query.tags).length > 0
+          ? JSON.parse(val.query.tags)
+          : ["*"];
+      this.fetchData();
+    }
+  },
   methods: {
     fetchData() {
-    //   this.firestore
-    //     .collection("resources")
-    //     .orderBy(this.sortBy, "asc")
-    //     .limit(this.pageSize)
-    //     .startAt(this.startAt.toString())
-    //     .where("tags", "array-contains-any", ["kids"])
-    //     .get()
-    //     .then(response => {
-    //       response.forEach(doc => {
-    //         this.resources.push(doc.data());
-    //       });
-    //     })
-    //     .catch(error => {
-    //       this.hasError = true;
-    //       this.error = error;
-    //     });
-    },
+      this.resources = [];
+      this.loading = true;
+      this.firestore
+        .collection("resources")
+        .orderBy(this.sortBy, this.direction)
+        .where("tags", "array-contains-any", this.tags)
+        .get()
+        .then(response => {
+          response.forEach(doc => {
+            this.resources.push({id: doc.id, ...doc.data()});
+          });
+        })
+        .catch(error => {
+          this.hasError = true;
+          this.error = error;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    }
   }
 };
 </script>
-<style scoped>
-  .card {
-    min-height: 445px;
-  }
-</style>

@@ -31,21 +31,12 @@ import * as firebase from "firebase/app";
 export default {
   data: () => ({
     firestore: firebase.firestore(),
-    tags: []
+    tags: [],
+    values: []
   }),
   watch: {
     $route: function(val) {
-      this.values = this.$route.query.tags ? this.$route.query.tags : [];
-    }
-  },
-  computed: {
-    values: {
-      // getter
-      get: function() {
-        return this.$route.query.tags ? this.$route.query.tags : [];
-      },
-      // setter
-      set: function(newValue) {}
+      this.values = val.query.tags ? JSON.parse(val.query.tags) : [];
     }
   },
   mounted() {
