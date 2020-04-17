@@ -1,6 +1,10 @@
 
 <template>
-  <v-container fluid>
+  <v-row>
+<v-col cols="3">
+<SideSearch />
+</v-col>
+<v-col cols="9">
     <v-row justify="center" align="center" v-if="loading">
       <v-col v-for="n in 4" :key="n" cols="12" sm="6" md="3">
         <v-card>
@@ -33,7 +37,7 @@
                   v-for="tag in item.tags"
                   :key="tag"
                   class="ma-2"
-                  :color="tag == 'kids' ? 'primary' : 'grey'"
+                  color="secondary"
                   label
                   text-color="white"
                 >
@@ -68,16 +72,23 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </v-col>
+  </v-row>
 </template>
 
 <script>
 import * as firebase from "firebase/app";
+import SideSearch from "@/components/SideSearch";
+
 export default {
-  name: "Start",
+  name: "Query",
+  components: {
+    SideSearch
+  },
   data: () => ({
     resources: [],
     tags: [""],
+    search: "",
     hasError: false,
     error: "",
     firestore: firebase.firestore(),
@@ -99,11 +110,11 @@ export default {
   },
   watch: {
     $route: function(val) {
-      console.log(JSON.parse(val.query.tags).length > 0);
       this.tags =
         JSON.parse(val.query.tags).length > 0
           ? JSON.parse(val.query.tags)
           : ["*"];
+        this.search = val.query.search;
       this.fetchData();
     }
   },
