@@ -1,38 +1,34 @@
 <template>
-  <span>
-    <v-app-bar fixed app color="#1976D2" dark>
-      <v-toolbar-title>
-        <router-link to="/" class="home-link">Life From Home</router-link>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-autocomplete
-        class="pt-6"
-        v-model="values"
-        :items="tags"
-        dense
-        chips
-        small-chips
-        label="Tags"
-        item-text="name"
-        item-value="name"
-        multiple
-        deletable-chips
-        solo
-        @change="search"
-      ></v-autocomplete>
-      <v-spacer></v-spacer>
-    </v-app-bar>
-  </span>
+      <v-navigation-drawer
+        floating
+        permanent
+        class="nav"
+      >
+      <h1>Categories</h1>
+        <v-list
+          dense
+          rounded
+        >
+          <v-list-item
+            v-for="item in tags"
+            :key="item.name"
+          >
+            <v-list-item-content>
+              <v-list-item-title>
+                  <v-checkbox v-model="values" class="mx-2" :value="item.name" :label="item.name" @change="search"></v-checkbox>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
 </template>
-
 <script>
 import * as firebase from "firebase/app";
-
-export default {
-  data: () => ({
+  export default {
+    data: () => ({
     firestore: firebase.firestore(),
     tags: [],
-    values: [],
+    values: []
   }),
   watch: {
     $route: function(val) {
@@ -77,11 +73,5 @@ export default {
       });
     }
   }
-};
+  }
 </script>
-<style scoped>
-.home-link {
-  text-decoration: none;
-  color: #fafafa;
-}
-</style>
