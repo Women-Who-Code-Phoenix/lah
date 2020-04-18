@@ -36,7 +36,7 @@
                   v-for="tag in item.tags"
                   :key="tag"
                   class="ma-2"
-                  :color="tag == 'kids' ? 'primary' : 'grey'"
+                  :color="tag == 'kids' ? 'primary' : 'secondary'"
                   label
                   text-color="white"
                 >
@@ -70,7 +70,7 @@
                   v-for="tag in item.tags"
                   :key="tag"
                   class="ma-2"
-                  :color="tag == 'exercise' ? 'primary' : 'grey'"
+                  :color="tag == 'exercise' ? 'primary' : 'secondary'"
                   label
                   text-color="white"
                 >
