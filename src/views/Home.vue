@@ -9,6 +9,7 @@
 import Start from "@/components/Start.vue";
 
 export default {
+  //Why is this name "Resources"? Shouldn't it be "Home"? I'm confused
   name: "Resources",
   components: {
     Start
