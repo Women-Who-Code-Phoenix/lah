@@ -17,11 +17,10 @@
         class="my-2"
       >
         <router-link 
-
-
-        
-          :to=link.href> {{link.name}} 
-          
+          :to=link.href
+          tag="button"
+          >
+          {{link.name}} 
         </router-link>
       </v-btn>
       <v-col
