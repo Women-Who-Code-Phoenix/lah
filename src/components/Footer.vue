@@ -34,7 +34,7 @@
               rounded
               class="my-2"
             >
-            GitHub  <br> <font-awesome-icon icon="external-link-alt" />
+            GitHub   <span class="mdi mdi-open-in-new"></span>
             </v-btn>
         </a>
       
@@ -58,5 +58,3 @@
     }),
   }
 </script>
-
-<!-- {name: 'GitHub', href: "https://github.com/Women-Who-Code-Phoenix/lah"} -->
