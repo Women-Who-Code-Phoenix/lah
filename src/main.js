@@ -10,10 +10,10 @@ Vue.use(VueFire);
 
 const config = {
   apiKey: "{key}",
-  authDomain: "funfromhome-{id}.firebaseapp.com",
-  databaseURL: "https://funfromhome-{id}.firebaseio.com",
-  projectId: "funfromhome-{id}",
-  storageBucket: "funfromhome-{id}.appspot."
+  authDomain: "{projectId}.firebaseapp.com",
+  databaseURL: "https://{projectId}.firebaseio.com",
+  projectId: "{projectId}",
+  storageBucket: "{projectId}.appspot."
 }
 
 firebase.initializeApp(config);
