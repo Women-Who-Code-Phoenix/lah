@@ -1,6 +1,6 @@
 <template>
   <v-footer
-    color="#1976D2"
+    color="blue darken-2"
     padless
     absolute
   >
@@ -23,7 +23,6 @@
           {{link.name}}
         </router-link>
       </v-btn>
-      
         <a 
           target="_blank"
           href="https://github.com/Women-Who-Code-Phoenix/lah"
@@ -40,9 +39,7 @@
         </a>
       
       <v-col
-        
-        class="dark-blue py-4 text-center white--text"
-        
+        class="primary darken-2 py-4 text-center white--text"
         cols="12"
       >
         {{ new Date().getFullYear() }} — <strong>Life at Home</strong>
@@ -62,9 +59,4 @@
   }
 </script>
 
-<style scoped>
-  .darkblue {
-    background-color: #0d3d6c;
-  }
-</style>
 <!-- {name: 'GitHub', href: "https://github.com/Women-Who-Code-Phoenix/lah"} -->
