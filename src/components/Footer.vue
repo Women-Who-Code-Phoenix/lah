@@ -20,9 +20,25 @@
           :to=link.href
           tag="button"
           >
-          {{link.name}} 
+          {{link.name}}
         </router-link>
       </v-btn>
+      
+        <a 
+          target="_blank"
+          href="https://github.com/Women-Who-Code-Phoenix/lah"
+          >
+            <v-btn
+              :key="GitHub"
+              color="white"
+              text
+              rounded
+              class="my-2"
+            >
+            GitHub  <br> <font-awesome-icon icon="external-link-alt" />
+            </v-btn>
+        </a>
+      
       <v-col
         
         class="dark-blue py-4 text-center white--text"
@@ -40,8 +56,7 @@
     data: () => ({
       links: [
         {name: 'Home', href: "/"},
-        {name: 'About', href: "/about"},
-        {name: 'GitHub', href: "https://github.com/Women-Who-Code-Phoenix/lah"}
+        {name: 'About', href: "/about"}
       ],
     }),
   }
@@ -52,3 +67,4 @@
     background-color: #0d3d6c;
   }
 </style>
+<!-- {name: 'GitHub', href: "https://github.com/Women-Who-Code-Phoenix/lah"} -->
