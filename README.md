@@ -22,11 +22,27 @@ yarn install
 git checkout -b {{issue-type}}/{{brief-description}}
 ```
 
+or
+
+```
+git clone https://github.com/Women-Who-Code-Phoenix/lah.git
+cd lah
+npm install
+git checkout -b {{issue-type}}/{{brief-description}}
+```
+
 Update your main.js file before continuing.
 
 ```
 git update-index --assume-unchanged ./src/main.js
 yarn serve
+```
+
+or 
+
+```
+git update-index --assume-unchanged ./src/main.js
+npm run serve
 ```
 
 **
