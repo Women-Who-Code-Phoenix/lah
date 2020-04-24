@@ -25,6 +25,7 @@
   </span>
 </template>
 
+
 <script>
 import * as firebase from "firebase/app";
 

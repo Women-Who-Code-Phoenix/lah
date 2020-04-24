@@ -9,7 +9,7 @@
 import Start from "@/components/Start.vue";
 
 export default {
-  name: "Resources",
+  name: "Home",
   components: {
     Start
   },
