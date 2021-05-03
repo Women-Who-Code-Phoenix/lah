@@ -21,6 +21,7 @@
         @change="search"
       ></v-autocomplete>
       <v-spacer></v-spacer>
+      <v-btn to="/resources/add">Contribute Activity</v-btn>
     </v-app-bar>
   </span>
 </template>
